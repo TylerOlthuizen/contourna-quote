@@ -4,6 +4,7 @@ import { QuoteContext } from '../../context/QuoteContext';
 import { StepOne } from './StepOne';
 import { StepTwo } from './StepTwo';
 import { Audio } from 'react-loader-spinner';
+import ReCAPTCHA from 'react-google-recaptcha';
 // import * as yup from 'yup';
 
 export const Quote = () => {
@@ -167,14 +168,19 @@ export const Quote = () => {
           </div>
         )}
         {step === 2 && (
-          <div className="flex justify-between mt-8">
-            <button className="primary" onClick={() => setStep(1)}>
-              Previous
-            </button>
-            <button className="primary" onClick={submitQuote} disabled={nextDisabled}>
-              Get My Quote
-            </button>
-          </div>
+          <>
+            <div className="mt-6">
+              <ReCAPTCHA sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA} />
+            </div>
+            <div className="flex justify-between mt-8">
+              <button className="primary" onClick={() => setStep(1)}>
+                Previous
+              </button>
+              <button className="primary" onClick={submitQuote} disabled={nextDisabled}>
+                Get My Quote
+              </button>
+            </div>
+          </>
         )}
 
         {loading && (
