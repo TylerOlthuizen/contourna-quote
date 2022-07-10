@@ -11,6 +11,7 @@
     "react-app-env": "^1.2.3",
     "react-dom": "^18.2.0",
     "react-google-autocomplete": "^2.7.0",
+    "react-loader-spinner": "^5.1.5",
     "react-multi-select-component": "^4.2.9",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

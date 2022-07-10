@@ -11,7 +11,7 @@ export const StepOne = ({
   setNextDisabled
 }) => {
   useEffect(() => {
-    if (values.city && values.email && values.firstName && values.lastName) {
+    if (values.city && values.email && values.first_name && values.last_name) {
       setNextDisabled(false);
     }
   }, [values]);
@@ -64,32 +64,32 @@ export const StepOne = ({
         <input
           placeholder="First Name"
           type="text"
-          name="firstName"
-          id="firstName"
+          name="first_name"
+          id="first_name"
           className={`flex-1 rounded border py-1 px-2 mx-2 min-w-max max-w-xs ${
-            touched.firstName && errors.firstName ? 'border-red-400' : 'border-gray-300'
+            touched.first_name && errors.first_name ? 'border-red-400' : 'border-gray-300'
           }`}
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.firstName}
+          value={values.first_name}
         />
-        {touched.firstName && errors.firstName && (
-          <span className="text-red-400">{errors.firstName}</span>
+        {touched.first_name && errors.first_name && (
+          <span className="text-red-400">{errors.first_name}</span>
         )}
         <input
           placeholder="Last Name"
           type="text"
-          name="lastName"
-          id="lastName"
+          name="last_name"
+          id="last_name"
           className={`flex-1 rounded border py-1 px-2 mx-2 min-w-max max-w-xs ${
-            touched.lastName && errors.lastName ? 'border-red-400' : 'border-gray-300'
+            touched.last_name && errors.last_name ? 'border-red-400' : 'border-gray-300'
           }`}
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.lastName}
+          value={values.last_name}
         />
-        {touched.lastName && errors.lastName && (
-          <span className="text-red-400">{errors.lastName}</span>
+        {touched.last_name && errors.last_name && (
+          <span className="text-red-400">{errors.last_name}</span>
         )}
       </div>
     </div>
