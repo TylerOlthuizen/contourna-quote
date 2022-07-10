@@ -17,7 +17,7 @@ export const StepOne = ({
   }, [values]);
 
   const { ref } = usePlacesWidget({
-    apiKey: 'AIzaSyDrsJWP5s5qn3mUPIaCCNbh60xLoluYxRI',
+    apiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
     onPlaceSelected: (place) => {
       setFieldValue('city', place.formatted_address);
     }
