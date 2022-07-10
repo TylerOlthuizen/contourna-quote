@@ -1,0 +1,598 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+/* app styles */
+
+/*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */
+
+/* main.css 2.1.0 | MIT License | https://github.com/h5bp/main.css#readme */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+   html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+  }
+
+  body {
+    background-color:#FCFAF7;
+  }
+  
+  /*
+   * Remove text-shadow in selection highlight:
+   * https://twitter.com/miketaylr/status/12228805301
+   *
+   * Vendor-prefixed and regular ::selection selectors cannot be combined:
+   * https://stackoverflow.com/a/16982510/7133471
+   *
+   * Customize the background color to match your design.
+   */
+  
+  ::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+  
+  ::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+  
+  /*
+   * A better looking default horizontal rule
+   */
+  
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+  
+  /*
+   * Remove the gap between audio, canvas, iframes,
+   * images, videos and the bottom of their containers:
+   * https://github.com/h5bp/html5-boilerplate/issues/440
+   */
+  
+  audio,
+  canvas,
+  iframe,
+  img,
+  svg,
+  video {
+    vertical-align: middle;
+  }
+  
+  /*
+   * Remove default fieldset styles.
+   */
+  
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /*
+   * Allow only vertical resizing of textareas.
+   */
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  /* ==========================================================================
+     Author's custom styles
+     ========================================================================== */
+  
+  /* ==========================================================================
+     Helper classes
+     ========================================================================== */
+  
+  /*
+   * Hide visually and from screen readers
+   */
+  
+  .hidden,
+  [hidden] {
+    display: none !important;
+  }
+  
+  /*
+   * Hide only visually, but have it available for screen readers:
+   * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+   *
+   * 1. For long content, line feeds are not interpreted as spaces and small width
+   *    causes content to wrap 1 word per line:
+   *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+   */
+  
+  .sr-only {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    /* 1 */
+  }
+  
+  /*
+   * Extends the .sr-only class to allow the element
+   * to be focusable when navigated to via the keyboard:
+   * https://www.drupal.org/node/897638
+   */
+  
+  .sr-only.focusable:active,
+  .sr-only.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    white-space: inherit;
+    width: auto;
+  }
+  
+  /*
+   * Hide visually and from screen readers, but maintain layout
+   */
+  
+  .invisible {
+    visibility: hidden;
+  }
+  
+  /*
+   * Clearfix: contain floats
+   *
+   * For modern browsers
+   * 1. The space content is one way to avoid an Opera bug when the
+   *    `contenteditable` attribute is included anywhere else in the document.
+   *    Otherwise it causes space to appear at the top and bottom of elements
+   *    that receive the `clearfix` class.
+   * 2. The use of `table` rather than `block` is only necessary if using
+   *    `:before` to contain the top-margins of child elements.
+   */
+  
+  .clearfix::before,
+  .clearfix::after {
+    content: " ";
+    display: table;
+  }
+  
+  .clearfix::after {
+    clear: both;
+  }
+  
+  /* ==========================================================================
+     EXAMPLE Media Queries for Responsive Design.
+     These examples override the primary ('mobile first') styles.
+     Modify as content requires.
+     ========================================================================== */
+  
+  @media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+  }
+  
+  @media print,
+    (-webkit-min-device-pixel-ratio: 1.25),
+    (min-resolution: 1.25dppx),
+    (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+  }
+  
+  /* ==========================================================================
+     Print styles.
+     Inlined to avoid the additional HTTP request:
+     https://www.phpied.com/delay-loading-your-print-css/
+     ========================================================================== */
+  
+  @media print {
+    *,
+    *::before,
+    *::after {
+      background: #fff !important;
+      color: #000 !important;
+      /* Black prints faster */
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+  
+    a,
+    a:visited {
+      text-decoration: underline;
+    }
+  
+    a[href]::after {
+      content: " (" attr(href) ")";
+    }
+  
+    abbr[title]::after {
+      content: " (" attr(title) ")";
+    }
+  
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+      content: "";
+    }
+  
+    pre {
+      white-space: pre-wrap !important;
+    }
+  
+    pre,
+    blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid;
+    }
+  
+    /*
+     * Printing Tables:
+     * https://web.archive.org/web/20180815150934/http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+    thead {
+      display: table-header-group;
+    }
+  
+    tr,
+    img {
+      page-break-inside: avoid;
+    }
+  
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+  
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+  }
+  
+  p{
+    line-height: 1.5;
+  }
+  
+  h2{
+    font-size: 2rem;
+  }
+
+  /* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+  
+  /* ==================================================================== */
+  /* Contourna Styles */
+  /* ==================================================================== */
+  
+  
+  img{
+    max-width: 100%;
+  }
+  
+  *{
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .container{
+    max-width: 1200px;
+    padding: 0rem 2rem;
+    margin: 0 auto;
+  }
+  
+  .flex-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  nav {
+    padding: 1rem 0;
+  }
+  
+  nav .flex-container{
+    flex-direction: row;
+  }
+  
+  nav .logo {
+    width: 120px;
+  }
+  
+  nav .flex-container{
+    justify-content: space-between;
+  }
+  
+  nav .menu {
+    display: flex;
+  }
+  
+  nav .menu li {
+    list-style-type: none;
+  }
+  
+  nav .menu li:first-child{
+    margin-right: 1rem;
+  }
+  
+  nav .menu li a {
+    background-color: #fdb913;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: none;
+    color: #fff;
+    display: inline-block;
+    margin-top: 1rem;
+    outline: none;
+    padding: 0.8rem 1.8rem;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity .2s ease;
+  }
+  
+  nav .menu li a:hover{
+    opacity: 0.6;
+  }
+    
+  footer {
+    background-color: #000;
+  }
+  
+  footer .contact-socials {
+    padding-left: 0;
+  }
+  
+  footer .contact-socials li {
+    list-style-type: none;
+  
+  }
+  
+  footer .contact-socials li a {
+    color:#fdb913;
+    text-decoration: none;
+    transition: opacity .2s ease;
+  }
+  
+  footer .contact-socials li a:hover{
+    opacity: 0.6;
+  }
+  
+  footer .copyright {
+    color:#fff;
+  }
+
+  input[type="text"], input[type="email"],  select{
+    border:none;
+    border-radius: 0px;
+    -webkit-appearance: none;
+  }
+
+
+
+  input[type="text"],input[type="checkbox"], input[type="email"], select {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #000;
+    border-color: #000 !important;
+    outline: none !important;
+  }
+
+
+  input[type=checkbox] {
+    position: relative;
+    cursor: pointer;
+  }
+  input[type=checkbox]:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 0;
+      left: 0;
+      border: 2px solid #000;
+      border-radius: 0px;
+      background-color: white;
+  }
+  input[type=checkbox]:checked:after {
+      content: "";
+      display: block;
+      width: 5px;
+      height: 10px;
+      border: 2px solid black;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      position: absolute;
+      top: 2px;
+      left: 6px;
+  }
+
+  input[type="text"]:focus,input[type="checkbox"]:focus, input[type="email"]:focus{
+    border-bottom: 2px solid #fdb913 !important; 
+  }
+
+
+  button.primary {
+    padding:0.5rem 1rem;
+    border-radius: 8px;
+    color:white;
+    background-color: #fdb913;
+    min-width: 8rem;
+    margin-top: 1rem;
+    max-width: fit-content;
+  }
+
+  .multiSelect {
+    -webkit-appearance: auto;
+    outline: none !important;
+    border: 0px !important;
+    flex:1;
+    text-align: left;
+  }
+
+  .multiSelect select{
+    -webkit-appearance: auto;
+    outline: none !important;
+  }
+
+  .multiSelect input[type="checkbox"] {
+    height: auto;
+  }
+
+  .multiSelect input[type="text"]:focus {
+    border-bottom: none !important; 
+  }
+
+  .multiSelect div.dropdown-container{
+    flex: 1;
+    border-radius: 0.25rem;
+    /* padding: 0.25rem 0.5rem; */
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0px;
+    border:none;
+    border-bottom: 2px solid #000;
+    border-color: #000 !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .multiSelect .dropdown-container .dropdown-heading-value span {
+    color:black;
+  }
+
+  .multiSelect .dropdown-container .dropdown-content {
+    min-width: 20rem;
+    text-align: left;
+  }
+
+  .multiSelect .dropdown-heading-dropdown-arrow{
+    display: none;
+  }
+
+  .multiSelect .dropdown-search-clear-icon {
+    margin-right: 0.2rem;
+    color: black !important;
+  }
+  
+  @media screen and (min-width:640px){
+  
+    h2{
+      font-size: 2.5rem;
+    }
+  
+  }
+  
+  @media screen and (min-width: 768px){
+  
+  
+    .flex-container{
+      flex-direction: row;
+    }
+
+    footer .flex-container {
+      justify-content: space-between;
+    }
+  
+    footer .contact-socials {
+      display: flex;
+    }
+  
+    footer .contact-socials li {
+      margin-right: 1rem;
+    }
+  
+    h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+    }
+
+    p{
+      font-size: 1.25rem;
+    }
+    
+
+  }
+  
+  
+  @media screen and (min-width: 960px){ 
+  
+    h1 {
+      font-size: 4rem;
+    }
+
+    h2{
+      font-size: 3rem;
+    }
+  
+  }
