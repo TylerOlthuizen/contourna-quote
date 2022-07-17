@@ -1,18 +1,32 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import { QuoteContext } from '../../context/QuoteContext';
 import { StepOne } from './StepOne';
 import { StepTwo } from './StepTwo';
 import { Audio } from 'react-loader-spinner';
 import ReCAPTCHA from 'react-google-recaptcha';
-// import * as yup from 'yup';
+import * as yup from 'yup';
+const axios = require('axios').default;
 
 export const Quote = () => {
   const { step } = useContext(QuoteContext);
   const { setStep } = useContext(QuoteContext);
-  const [nextDisabled, setNextDisabled] = useState(true);
   const [showEstimate, setShowEstimate] = useState(false);
   const [loading, setLoading] = useState(false);
+  const recaptchaRef = useRef(null);
+
+  const validationSchema1 = yup.object().shape({
+    city: yup.string().label('City').required(),
+    email: yup.string().email().label('Email').required(),
+    first_name: yup.string().label('First name').required()
+  });
+
+  const validationSchema2 = yup.object().shape({
+    industry: yup.string().label('Industry').required(),
+    size: yup.string().label('Size').required(),
+    goals: yup.array().label('Goals').required()
+  });
+
   const formik = useFormik({
     initialValues: {
       city: '',
@@ -21,22 +35,16 @@ export const Quote = () => {
       last_name: '',
       industry: '',
       size: '',
-      goals: [],
+      goals: '',
       documentation: ''
     },
-    onSubmit: function (values) {
-      alert(`You are registered! Name: ${values.name}. Email: ${values.email}. Profession: ${values.profession}. 
-        Age: ${values.age}`);
-    }
-    // validationSchema: yup.object.shape({
-    //   city: yup.string().label('City').required(),
-    //   email: yup.string().email().required(),
-    //   first_name: yup.string().label('First Name').required(),
-    //   industry: yup.string.label('Industry').required(),
-    //   size: yup.string.label('Size').required(),
-    //   goals: yup.object.label('Goals').required()
-    // })
+    onSubmit: () => submitQuote(),
+    validationSchema: step === 1 ? validationSchema1 : validationSchema2
   });
+
+  const next = async () => {
+    formik.validateForm().then((res) => Object.keys(res).length === 0 && setStep(2));
+  };
 
   function getQuotePrice() {
     const basePrice = 1500;
@@ -74,33 +82,47 @@ export const Quote = () => {
     return goalsString;
   }
 
-  function submitQuote() {
-    setStep('finished');
-    setLoading(true);
-    let formData = new FormData();
-    for (const [key, value] of Object.entries(formik.values)) {
-      if (key === 'goals') {
-        formData.append(key, getGoalsString(value));
-      } else if (key === 'documentation') {
-        formData.append(key, value ? 'Yes' : 'No');
-      } else {
-        formData.append(key, value);
-      }
-    }
-
-    formData.append('price', getQuotePrice());
-
-    fetch('https://getform.io/f/9e640968-32ef-4b36-8aa7-71019259266e', {
-      method: 'POST',
-      body: formData
-    })
-      .then(() => {
-        setTimeout(() => {
-          setLoading(false);
-          setShowEstimate(true);
-        }, 4000);
+  async function submitQuote() {
+    const token = recaptchaRef.current.getValue();
+    recaptchaRef.current.reset();
+    await axios
+      .post(process.env.REACT_APP_API_URL, { token })
+      .then((res) => {
+        console.log(res);
+        finishSubmit();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
+
+    function finishSubmit() {
+      setStep('finished');
+      setLoading(true);
+      let formData = new FormData();
+      for (const [key, value] of Object.entries(formik.values)) {
+        if (key === 'goals') {
+          formData.append(key, getGoalsString(value));
+        } else if (key === 'documentation') {
+          formData.append(key, value ? 'Yes' : 'No');
+        } else {
+          formData.append(key, value);
+        }
+      }
+
+      formData.append('price', getQuotePrice());
+
+      fetch('https://getform.io/f/9e640968-32ef-4b36-8aa7-71019259266e', {
+        method: 'POST',
+        body: formData
+      })
+        .then(() => {
+          setTimeout(() => {
+            setLoading(false);
+            setShowEstimate(true);
+          }, 4000);
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   return (
@@ -130,7 +152,7 @@ export const Quote = () => {
             </h1>
             <p>
               We will email you a copy of the quote. Please contact us if you have any other
-              qestions
+              questions
             </p>
           </>
         )}
@@ -146,7 +168,6 @@ export const Quote = () => {
             handleBlur={formik.onBlur}
             values={formik.values}
             setFieldValue={formik.setFieldValue}
-            setNextDisabled={setNextDisabled}
           />
         )}
         {step === 2 && (
@@ -157,12 +178,11 @@ export const Quote = () => {
             handleBlur={formik.onBlur}
             values={formik.values}
             setFieldValue={formik.setFieldValue}
-            setNextDisabled={setNextDisabled}
           />
         )}
         {step < 2 && (
           <div className="flex justify-end mt-8">
-            <button className="primary" onClick={() => setStep(2)} disabled={nextDisabled}>
+            <button className="primary" type="button" onClick={next}>
               Next
             </button>
           </div>
@@ -170,13 +190,13 @@ export const Quote = () => {
         {step === 2 && (
           <>
             <div className="mt-6">
-              <ReCAPTCHA sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA} />
+              <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA} />
             </div>
             <div className="flex justify-between mt-8">
               <button className="primary" onClick={() => setStep(1)}>
                 Previous
               </button>
-              <button className="primary" onClick={submitQuote} disabled={nextDisabled}>
+              <button className="primary" type="submit">
                 Get My Quote
               </button>
             </div>

@@ -1,21 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 
-export const StepTwo = ({
-  touched,
-  errors,
-  handleChange,
-  handleBlur,
-  values,
-  setFieldValue,
-  setNextDisabled
-}) => {
-  useEffect(() => {
-    if (values.goals && values.documentation) {
-      setNextDisabled(false);
-    }
-  }, [values]);
-
+export const StepTwo = ({ errors, handleChange, handleBlur, values, setFieldValue }) => {
   const industryList = [
     'Accommodation Services',
     'Food services and drinking places',
@@ -88,9 +74,7 @@ export const StepTwo = ({
         <select
           name="industry"
           id="industry"
-          className={`flex-1 py-1 px-2 min-w-0 ${
-            touched.industry && errors.industry ? 'border-red-400' : 'border-gray-300'
-          }`}
+          className={`flex-1 py-1 px-2 min-w-0`}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.industry}>
@@ -103,16 +87,13 @@ export const StepTwo = ({
             );
           })}
         </select>
-        {touched.name && errors.industry && <span className="text-red-400">{errors.industry}</span>}
       </div>
       <div className="flex flex-wrap items-center mb-2">
         <p className="mx-2">and the number of employees, including myself are</p>
         <select
           name="size"
           id="size"
-          className={`flex-1 py-1 px-2 ${
-            touched.size && errors.size ? 'border-red-400' : 'border-gray-300'
-          }`}
+          className={`flex-1 py-1 px-2`}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.size}>
@@ -122,7 +103,6 @@ export const StepTwo = ({
           <option value="25-50">25-50</option>
           <option value="51+">51+</option>
         </select>
-        {touched.name && errors.size && <span className="text-red-400">{errors.size}</span>}
       </div>
       <div className="flex items-center mb-2">
         <p className="mx-2  min-w-fit">I am looking to improve my</p>
@@ -137,8 +117,6 @@ export const StepTwo = ({
           }}
           closeOnChangedValue={false}
         />
-
-        {touched.goals && errors.goals && <span className="text-red-400">{errors.goals}</span>}
       </div>
       <div className="flex items-center mb-2">
         <p className="mx-2">and I currently have documentation available </p>
@@ -147,13 +125,17 @@ export const StepTwo = ({
           type="checkbox"
           name="documentation"
           id="documentation"
-          className={`flex-0 ml-2 rounded border py-1 px-2  ${
-            touched.documentation && errors.documentation ? 'border-red-400' : 'border-gray-300'
-          }`}
+          className={`flex-0 ml-2 rounded border py-1 px-2`}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.documentation}
         />
+      </div>
+
+      <div className="errors flex flex-col flex-1 text-left my-4 mt-8">
+        {errors.industry && <span className="text-red-400">{errors.industry}</span>}
+        {errors.size && <span className="text-red-400">{errors.size}</span>}
+        {errors.goals && <span className="text-red-400">{errors.goals}</span>}
       </div>
     </div>
   );
